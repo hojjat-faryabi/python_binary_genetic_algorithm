@@ -5,6 +5,7 @@ from rouletteWheel import rouletteWheel
 from crossover import crossover
 from mutaion import mutaion
 import matplotlib.pyplot as plt
+import timeit
 
 
 obj = init()
@@ -14,6 +15,8 @@ finalSol = None
 averageFitness = []
 
 print("Calculating ... ")
+
+start = timeit.default_timer()
 
 for it in range(obj.iteration):
     realValues = chromeDecode(obj)
@@ -35,6 +38,9 @@ for it in range(obj.iteration):
     obj.population = mutaion(newPopulation, obj)
     
     
+stop = timeit.default_timer()
+
+print("calculating time = " + str(stop - start))
 print(finalSol)
 plt.plot(bestSoFar, label="Best So Far")
 plt.plot(averageFitness, label="Average Fitness")
